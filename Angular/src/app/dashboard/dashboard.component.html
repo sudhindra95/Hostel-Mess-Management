@@ -1,0 +1,214 @@
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div class="header">
+  <div id="srs_logo">
+    <img src="assets/images/srs.jpg" height="90">
+  </div>
+
+  <div id="srs_name">
+    Sharada Residential School    
+  </div>
+
+  <div id="hostel_name">
+    (Madhava Nilaya Campus)
+  </div>
+
+  <div id="horizontal_nav">
+
+    <a [routerLink]="['/dashboard']">
+      <div id="srs_text">
+        <p id="horizontal_options">STOCK</p>
+      </div>
+    </a>
+
+
+    <a [routerLink]="['/add-purchase']">
+      <div id="srs_text">
+        <p id="horizontal_options">PURCHASE</p>
+      </div>
+    </a>
+
+    <a [routerLink]="['/add-consumption']">
+      <div id="srs_text">
+        <p id="horizontal_options">CONSUMPTION</p>
+      </div>
+    </a>
+
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+<div class="body_content">
+
+  <a style="text-decoration: none" [routerLink]="">
+    <div id="view_purchase">
+      <p>STOCK REGISTER</p>
+    </div>
+  </a>
+
+  <hr id="line" />
+
+  <form (ngSubmit)="findStockData()" #testForm="ngForm" ngNativeValidate>
+    <div id="billno_field" style="float:left;  margin-left:240px;margin-top:30px;">
+      <input type="date" id="form_bnum" [(ngModel)]="Dates.fromDate" name="Dates.fromDate" max="{{mydate}}"
+        (change)="changeItem()" placeholder=" " required #fromdateControl="ngModel"
+        [ngClass]="{'disabledClass':fromdateControl.errors?.required}" />
+      <!-- <button class="btn"><i class="fa fa-search"></i></button> -->
+      <span id="searchPurchase_id">From Date</span>
+    </div>
+
+    <div id="billno_field" style="float:left;  margin-left:100px;margin-top:30px;">
+      <input type="date" id="form_bnum" [(ngModel)]="Dates.toDate" name="Dates.toDate" max="{{mydate}}"
+        (change)="changeItem()" placeholder=" " required #todateControl="ngModel"
+        [ngClass]="{'disabledClass':todateControl.errors?.required}" />
+      <!-- <button class="btn"><i class="fa fa-search"></i></button> -->
+      <span id="searchPurchase_id">To Date</span>
+    </div>
+
+    <button class="reset_button" type="reset" (click)="clearResultField()">CANCEL</button>
+
+    <button class="submit_button" type="submit" [disabled]="testForm.invalid"
+      [class.disabledSubmit]="testForm.invalid">SUBMIT</button>
+  </form>
+
+  <ng-container>
+    <div *ngIf="!show" [ngStyle]="{'display':display_mode}">
+      <div class="table-heading-container">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="6">
+                <i class="fas fa-calendar" style="float: left;margin-left: 30px;margin-top:5px"></i>
+                <label style="float: left;margin-left: 150px;margin-top:7px">Stock Data </label>
+                <label style="float:right;margin-right: 10px;margin-top:7px;font-size: 14px;">Export Excel</label>
+                <a href="http://localhost:9090/webapp/downloadStockReport">
+                  <img src="assets/images/excel.jpg" height="30"
+                    style="float: right;margin-right: 10px;cursor: pointer;">
+                </a>
+
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;height:25px">
+                <label style="margin-left: 62px;">Date</label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 25px;">Opening Stock <span id="inkgs">(kgs)</span></label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="float:right;margin-right: 20px;" [ngStyle]="{'margin-top':margin_top_onclick}"><i
+                    class="fas fa-sort-alpha-down" style="cursor: pointer;margin-right: 8px;margin-top:2px;"
+                    (click)="sortByProductName()"></i>Product Name <i class="fas fa-filter"
+                    style="cursor: pointer;margin-left: 2px;" (click)="filterProductName()"></i></label>
+                <div id="filtertext" [ngStyle]="{'display':display_filtertextbox}">
+                  <input type="text" id="filtertextbox" placeholder="type text to filter..." #filtertextvalue />
+                  <div id="filter_submit" (click)="getFilteredList(filtertextvalue.value)"><i class="fas fa-angle-right"
+                      aria-hidden="true" style="margin-left:5px;margin-top:2px;cursor:pointer"></i></div>
+                </div>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 20px;">Goods Received <span id="inkgs">(kgs)</span></label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 2px;">Consumed Quantity <span id="inkgs">(kgs)</span></label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 25px;">Closing Stock <span id="inkgs">(kgs)</span></label>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="lessthan12" class="table-container" [ngStyle]="{'margin-top':table_container_marg_top}">
+        <table>
+          <tbody>
+            <tr *ngFor='let stock of stockList;'>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.date}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.openingstock}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.productname}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.goodsreceived}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.consumedquantity}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.closingstock}}</label>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="greaterthan12" class="table-container1" [ngStyle]="{'margin-top':table_container_marg_top}">
+        <table>
+          <tbody>
+            <tr *ngFor='let stock of stockList;'>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.date}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.openingstock}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.productname}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.goodsreceived}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.consumedquantity}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{stock.closingstock}}</label>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </ng-container>
+
+  <br>
+  <div *ngIf="show" >
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <div *ngIf="isErrorMessage" [ngStyle]="{'display':isErrorMessage ? 'block': 'none'}"
+    style="margin-left: 585px;margin-top:350px;color:red;font-size:26px;position:absolute;font-family: daimler!important">
+    {{errorMessage}}
+  </div>
+
+
+  <div class="footer">
+    <p><i class="fas fa-copyright" aria-hidden="true"></i> Copyright 2019 Sharada Residential School. All Rights
+      Reserved.</p>
+  </div>
+
+
+</div>

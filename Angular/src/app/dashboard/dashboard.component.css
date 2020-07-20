@@ -1,0 +1,404 @@
+.header{
+   
+    background-color: #002a65;
+    height: 90px;
+    width:100%;
+    position:fixed;
+    top:0px;
+    left:0px;
+}
+
+#srs_logo{
+    width:130px;
+    margin-left:40px;
+    /* height:60px; */
+    float:left;
+}
+
+#srs_name{
+  width:500px;
+  margin-left:70px;
+  margin-top:20px;
+  color:white;
+  font-weight:bold;
+  font-size: 32pt;
+  font-family: daimler !important;
+  /* height:60px; */
+  float:left;
+}
+
+#hostel_name{
+  margin-top:35px;
+  color:#5df7d1;
+  float:left;
+  font-size: 14pt;
+  width:290px;
+  font-family: daimler !important;
+}
+
+#horizontal_nav{
+    margin-left:770px;
+}
+
+#srs_text{
+    float:left;
+    font-family: daimler !important;
+    font-size: 18px;
+    color:#a1c0e7;
+    display: block;
+    text-align: center;
+    margin-top: 17px;
+}
+
+#srs_text:hover{
+    background-color: rgb(187, 130, 25);
+}
+
+#horizontal_options{
+    margin-left:20px;
+    margin-right: 20px;
+}
+
+ 
+
+
+.body_content{
+    background-color: white;
+}
+
+
+#view_purchase{
+    height:50px;
+    width:150px;
+    background-color: #005cab;
+    /* position:absolute; */
+    margin-left:240px;
+    margin-top:143px;
+    text-decoration: none;
+    color: white;
+    float:left;
+    text-align: center;
+    font-weight: bold;
+    font-family: daimler !important;
+ 
+  }
+
+
+
+#line{
+    color: black;
+    width: 30px;
+    /* position: absolute; */
+    float: left;
+    width:925px;
+    height: 3px;
+    border: none;
+    background-color: rgb(223, 213, 213);
+    margin-top: 192px;
+    /* position: absolute;*/ 
+    /* margin-left: 390px; */
+  }
+
+
+  #form_bnum{
+    border-top: none;
+    border-left:none;
+    border-right: none;
+    border-bottom: #ccc solid 1px;
+    font-size: 18px;
+    height:30px;
+    font-family: daimler !important;
+    width:200px;
+    float:left;
+    
+  }
+  
+  
+  #form_bnum:focus{
+    border-top: none;
+    border-left:none;
+    border-right: none;
+    outline: none;
+    border-bottom: blue solid 1px;
+  }
+
+  #searchPurchase_id {
+    font-family: daimler !important;
+    padding:10px;
+    pointer-events: none;
+    position:absolute;
+    float:left;
+    margin-left:-207px;
+    margin-top:225px;
+    /* left:0; */
+    top:0;
+    transition: 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity:0.5;
+  }
+  
+  
+  #form_bnum:focus + #searchPurchase_id, #form_bnum:not(:placeholder-shown) + #searchPurchase_id {
+    opacity:1;
+    transform: scale(0.75) translateY(-80%) translateX(-20px);
+  }
+
+
+  #filtertext{
+    margin-top:10px;
+  }
+
+
+  #filtertextbox{
+    height:20px;
+    margin-bottom: 1px;
+    width:140px;
+    margin-left:7px;
+    font-family:daimler!important;
+  }
+
+
+  #filter_submit{
+    background-color: black;
+    color:white;
+    height:25px;
+    width:16px;
+    position:absolute;
+    margin-top:-27px;
+    margin-left:151px;
+    cursor:pointer;
+  }
+
+  .table-heading-container{
+    width:1075px;
+    position: absolute;
+    background-color:white;
+    margin-left: 240px;
+    margin-top: 280px;
+  }
+
+
+
+
+  .table-container{
+    height: 350px;
+    width:1075px;
+    background-color:white;
+    position: absolute;
+    margin-top: 384px;
+    margin-left: 240px;
+    overflow-y: auto;
+    /* margin-bottom: 1000px; */
+  }
+
+
+  .table-container1{
+    height: 305px;
+    width:1094px;
+    background-color:white;
+    position: absolute;
+    margin-top: 346px;
+    margin-left: 240px;
+    overflow-y: auto;
+    /* margin-bottom: 1000px; */
+  }
+
+
+  table { 
+    table-layout: fixed;
+    font-family: daimler !important; 
+    font-size:large; 
+    border-collapse: collapse; 
+    width: 100%;
+    border: 2px solid #acacac; 
+  } 
+
+  th{
+    color: black; 
+    font-family: daimler !important;
+    height:35px;
+
+    border: 2px solid #acacac; 
+  }
+
+  tr{
+    border: 2px solid #acacac; 
+    
+  }
+  
+  td { 
+  
+    border: 2px solid #acacac; 
+  }
+
+
+  #inkgs{
+    font-style:italic;
+    font-size: 8pt;
+  
+  }
+
+
+  
+
+  .reset_button{
+    cursor:pointer;
+    float: left;
+    margin-top: -45px;
+    margin-left: 885px;
+    background-color: white;
+    height: 40px;
+    width: 120px;
+    border-radius: 30px;
+    border: #ccc solid 2px;
+    color:grey;
+    font-weight: bold;
+    font-family: daimler !important;
+  }
+  
+  .reset_button:focus{
+    outline: 0;
+  }
+  
+  .submit_button:focus{
+    outline: 0;
+  }
+  
+  .submit_button{
+    cursor: pointer;
+    margin-top:-45px;
+    margin-left: 1100px;
+    float: left;
+    background-color: #005cab;
+    height: 40px;
+    width: 120px;
+    border-radius: 30px;
+    border: none;
+    color:white;
+    font-weight: bold;
+    font-family: daimler !important;
+  }
+
+
+  .disabledClass { 
+    border-bottom: 2px solid red;
+    
+}
+
+.disabledSubmit{
+  opacity:0.3;
+  cursor:default;
+ 
+}
+
+
+
+
+.image{
+   
+    float: left;
+    margin-left: 8px;
+    margin-top:8px;
+}
+
+
+.footer{
+    font-family: daimler !important;
+    background-color: #e0e0d1;
+    text-align:center;
+    position: fixed;
+    margin-top: 100px;
+    /* left: 0; */
+    clear: both;
+    bottom: 0;
+    width: 100%;
+    height:2.5rem;
+    color: grey;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+
+
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 60%;
+  border-top: 5px solid #33331a;
+  width: 30px;
+  height: 30px;
+  margin-top: 400px;
+  margin-left:650px;
+  -webkit-animation: spin 1.5s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+ul{
+  position:absolute;
+  margin-top:350px;
+  margin-left:700px;
+  transform:translate(-50%,-50%);
+  display:flex;
+
+}
+
+ul li{
+  list-style:none;
+  width:6px;
+  height:20px;
+  background:#005cab;
+  margin : 0 4px;
+  animation: animate .7s infinite alternate;
+
+}
+
+@keyframes animate{
+  0%{
+    transform:scaleY(1);
+  }
+  25%{
+   transform:scaleY(1);
+ }
+ 50%{
+   transform:scaleY(1);
+ }
+ 75%{
+   transform:scaleY(1);
+ }
+ 100%{
+   transform:scaleY(3);
+ }
+}
+
+ul li:nth-child(1){
+  animation-delay: .1s;
+}
+ul li:nth-child(2){
+ animation-delay: .2s;
+}
+ul li:nth-child(3){
+ animation-delay: .3s;
+}
+ul li:nth-child(4){
+ animation-delay: .4s;
+}
+ul li:nth-child(5){
+ animation-delay: .5s;
+}
+ul li:nth-child(6){
+ animation-delay: .6s;
+} 

@@ -1,0 +1,228 @@
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div class="header">
+  <div id="srs_logo">
+    <img src="assets/images/srs.jpg" height="90">
+  </div>
+
+  <div id="srs_name">
+    Sharada Residential School
+  </div>
+
+  <div id="hostel_name">
+    (Madhava Nilaya Campus)
+  </div>
+
+  <div id="horizontal_nav">
+
+    <a [routerLink]="['/dashboard']">
+      <div id="srs_text">
+        <p id="horizontal_options">STOCK</p>
+      </div>
+    </a>
+
+
+
+    <a [routerLink]="['/add-purchase']">
+      <div id="srs_text">
+        <p id="horizontal_options">PURCHASE</p>
+      </div>
+    </a>
+
+    <a [routerLink]="['/add-consumption']">
+      <div id="srs_text">
+        <p id="horizontal_options">CONSUMPTION</p>
+      </div>
+    </a>
+
+
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+<div class="body_content">
+
+  <a style="text-decoration: none" [routerLink]="['/add-purchase']">
+    <div id="add_purchase">
+      <p>ADD PURCHASE</p>
+    </div>
+  </a>
+
+  <a style="text-decoration: none" [routerLink]="['/view_purchase']">
+    <div id="view_purchase">
+      <p>VIEW PURCHASE</p>
+    </div>
+  </a>
+
+  <a style="text-decoration: none" [routerLink]="['/modify_purchase']">
+    <div id="modify_purchase">
+      <p>MODIFY PURCHASE</p>
+    </div>
+  </a>
+
+  <hr id="line" />
+
+  <form autocomplete="off">
+    <div id="billno_field" style="float:left; position:absolute; margin-left:244px;margin-top:137px;">
+      <input type="date" id="form_bnum" placeholder=" " (change)="changeItem()" [(ngModel)]="Dates.fromDate" name="Dates.fromDate"
+        max="{{mydate}}" #fdate required />
+      <!-- <button class="btn"><i class="fa fa-search"></i></button> -->
+      <span id="searchPurchase_id">From Date</span>
+    </div>
+
+    <div id="billno_field" style="float:left; position:absolute; margin-left:620px;margin-top:137px;">
+      <input type="date" id="form_bnum" placeholder=" " (change)="changeItem()" [(ngModel)]="Dates.toDate" name="Dates.toDate" max="{{mydate}}"
+        #tdate required />
+      <!-- <button class="btn"><i class="fa fa-search"></i></button> -->
+      <span id="searchPurchase_id">To Date</span>
+    </div>
+
+    <div class="autocmplete" style="float:left; position:absolute; margin-left:990px;margin-top:135px;">
+      <input type="text" id="form_bnum" placeholder=" " name="search" [(ngModel)]="model.search"
+        (keydown.backspace)="textAreaEmpty($event)" (keyup)="onKey($event)" required #searchControl="ngModel" />
+      <span id="searchPurchase_id">Search Vendor</span>
+      <i class="fas fa-search" id="search"
+        [ngStyle]="{'opacity':opacity_property,'color':color_property,'pointer-events':cursor_property}"
+        (click)="findPurchaseData()"></i>
+    </div>
+    <div class="dropdown-content" [ngStyle]="{'display':display_dropdown}"
+      [ngClass]="{'disabledClass':searchControl.errors?.required}">
+      <div *ngFor='let vendor of vendorList;' [ngClass]="{'disabledClass':searchControl.errors?.required}">
+        <a (click)="getUrlText(textValue.text)" #textValue>{{vendor}}</a>
+      </div>
+
+    </div>
+  </form>
+
+  <ng-container>
+    <div *ngIf="!show" [ngStyle]="{'display':display_mode}">
+      <div class="table-heading-container">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="6">
+                <i class="fas fa-user" style="float: left;margin-left: 30px;margin-top:5px"></i>
+                <label style="float: left;margin-left: 30px;margin-top:7px">{{model.search}}</label>
+                <label style="float:right;margin-right: 10px;margin-top:7px;font-size: 14px;">Export Excel</label>
+                <a href="http://localhost:9090/webapp/downloadPurchaseReport">
+                  <img src="assets/images/excel.jpg" height="30"
+                    style="float: right;margin-right: 10px;cursor: pointer;" (click)="openFile();">
+                </a>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;height:25px">
+                <label style="margin-left: 32px;">Date</label>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 32px;">Bill Number</label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 32px;">Product Name</label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 32px;">Price</label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 32px;">Quantity<span id="inkgs">&nbsp;(kgs)</span></label>
+              </td>
+              <td style="background-color: rgb(201, 212, 248);font-weight: bold;">
+                <label style="margin-left: 32px;">Amount</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="lessthan12" class="table-container" [ngStyle]="{'margin-top':table_container_marg_top}">
+        <table>
+          <tbody>
+            <tr *ngFor='let purchase of purchaseList;'>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.date  | date: 'dd/MM/yyyy'}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.billnumber}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.productname}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;"><i class="fas fa-inr" aria-hidden="true"
+                    style="margin-left:5px;margin-top:3px;color: black"></i> &#x20b9; &nbsp;{{purchase.price}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.quantity}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;"><i class="fas fa-inr" aria-hidden="true"
+                    style="margin-left:5px;margin-top:3px;color: black"></i>&#x20b9; &nbsp;{{purchase.amount}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="greaterthan12" class="table-container1" [ngStyle]="{'margin-top':table_container_marg_top}">
+        <table>
+          <tbody>
+            <tr *ngFor='let purchase of purchaseList;'>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.date  | date: 'dd/MM/yyyy'}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.billnumber}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.productname}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;"><i class="fas fa-inr" aria-hidden="true"
+                    style="margin-left:5px;margin-top:3px;color: black"></i>&#x20b9; &nbsp;{{purchase.price}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;">{{purchase.quantity}}</label>
+              </td>
+              <td style="height:25px">
+                <label style="margin-left: 32px;"><i class="fas fa-inr" aria-hidden="true"
+                    style="margin-left:5px;margin-top:3px;color: black"></i> &#x20b9; &nbsp;{{purchase.amount}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+
+  <br>
+  <div *ngIf="show" >
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+  <div *ngIf="isErrorMessage"
+    style="position:absolute;margin-left: 585px;margin-top:240px;color:red;font-size:26px;font-family: daimler!important">
+    {{errorMessage}}
+  </div>
+
+
+  <div class="footer">
+    <p><i class="fas fa-copyright" aria-hidden="true"></i> Copyright 2019 Sharada Residential School. All Rights
+      Reserved.</p>
+  </div>
+
+
+</div>

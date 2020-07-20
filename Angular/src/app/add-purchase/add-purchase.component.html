@@ -1,0 +1,187 @@
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div class="header">
+  <div id="srs_logo">
+    <img src="assets/images/srs.jpg" height="90">
+  </div>
+
+  <div id="srs_name">
+      Sharada Residential School
+  </div>
+
+  <div id="hostel_name">
+    (Madhava Nilaya Campus)
+  </div>
+
+  <div id="horizontal_nav">
+
+    <a [routerLink]="['/dashboard']">
+      <div id="srs_text">
+        <p id="horizontal_options">STOCK</p>
+      </div>
+    </a>
+
+    <!-- <a [routerLink] = "['/add-product']">
+        <div id="srs_text">
+          <p id="horizontal_options">ADD PRODUCT</p>
+        </div>
+      </a> -->
+
+    <a [routerLink]="['/add-purchase']">
+      <div id="srs_text">
+        <p id="horizontal_options">PURCHASE</p>
+      </div>
+    </a>
+
+    <a [routerLink]="['/add-consumption']">
+      <div id="srs_text">
+        <p id="horizontal_options">CONSUMPTION</p>
+      </div>
+    </a>
+
+  </div>
+
+
+
+
+</div>
+
+
+<div class="body_content">
+
+  <a style="text-decoration: none" [routerLink]="['/add-purchase']" [ngStyle]="{'background-color':bgcolor}">
+    <div id="add_purchase">
+      <p>ADD PURCHASE</p>
+    </div>
+  </a>
+
+  <a style="text-decoration: none" [routerLink]="['/view_purchase']" [ngStyle]="{'background-color':backcolor}"
+    (click)="changeBgColorAddPurchase()">
+    <div id="view_purchase">
+      <p>VIEW PURCHASE</p>
+    </div>
+  </a>
+
+  <a style="text-decoration: none" [routerLink]="['/modify_purchase']">
+    <div id="modify_purchase">
+      <p>MODIFY PURCHASE</p>
+    </div>
+  </a>
+
+  <hr id="line" />
+
+  <div class="form-container">
+    <form (ngSubmit)="postPurchaseData(testForm)" #testForm="ngForm" autocomplete="off" ngNativeValidate>
+      <div id="form-heading">
+        <p id="para-heading">Enter your purchase details</p>
+      </div>
+
+      <div id="form_fields">
+        <div id="date_field" style="float:left">
+          <label style="font-size: 12px;font-family: daimler !important;">Date</label><br>
+          <input type="date" id="form_data" name="date" [(ngModel)]="model.date" max="{{mydate}}" required
+            #dateControl="ngModel" [ngClass]="{'disabledClass':dateControl.errors?.required}" />
+        </div>
+
+        <div id="billno_field" style="float:left; margin-top:140px;"><!--forother laptop margin-top:140px;-->
+          <input type="text" id="form_bnum" name="billnumber" [(ngModel)]="model.billnumber" placeholder=" " required
+            #billnumberControl="ngModel" [ngClass]="{'disabledClass':billnumberControl.errors?.required}" />
+          <span id="bnum_id">Bill Number</span>
+        </div>
+
+        <div id="billno_field" style="float:left; margin-left:75px;margin-top:140px;"><!--forother laptop margin-top:140px;-->
+          <input type="text" id="form_pname" name="productname" [(ngModel)]="model.productname" placeholder=" "
+            (keyup)="searchProducts($event)" required #productnameControl="ngModel"
+            [ngClass]="{'disabledClass':productnameControl.errors?.required}" />
+          <span id="pname_id">Product Name</span>
+        </div>
+        <div class="dropdown-content" [ngStyle]="{'display':display_dropdown}"
+          [ngClass]="{'disabledClass':productnameControl.errors?.required}">
+          <div *ngFor='let product of productList;' [ngClass]="{'disabledClass':productnameControl.errors?.required}">
+            <a (click)="getUrlText(textValue.text)" #textValue>{{product}}</a>
+          </div>
+
+        </div>
+
+        <div id="vendorname_field" style="float:left; margin-left:75px;margin-top:140px;"><!--forother laptop margin-top:140px;-->
+          <input type="text" id="form_vname" name="vendorname" [(ngModel)]="model.vendorname" placeholder=" " required
+          (keyup)="searchVendors($event)" #vendornameControl="ngModel" [ngClass]="{'disabledClass':vendornameControl.errors?.required}" />
+          <span id="vname_id">Vendor Name</span>
+        </div>
+        <div class="dropdown-content1" [ngStyle]="{'display':display_dropdown1}" [ngClass]="{'disabledClass':vendornameControl.errors?.required}" >
+          <div  *ngFor='let vendor of vendorList;' [ngClass]="{'disabledClass':vendornameControl.errors?.required}">
+              <a (click)="getUrlTextForVendors(textValue.text)" #textValue>{{vendor}}</a>
+          </div>
+          
+        </div>
+
+        <div id="price_field" style="margin-top:270px; "><!--forother laptop margin-top:270px;-->
+          <input type="number" step=0.01 min=0 id="form_price" name="price" [(ngModel)]="model.price" placeholder=" "
+            [(ngModel)]='price' (keyup)="onPriceKey(p.value)" (change)="PriceChange(p.value)" #p required
+            #priceControl="ngModel" [ngClass]="{'disabledClass':priceControl.errors?.required}" />
+          <span id="price_id">Price</span>
+        </div>
+
+        <div id="price_field" style="float:left;margin-left:75px; ">
+          <input type="number" step=0.001 id="form_quantity" name="quantity" [(ngModel)]="model.quantity" min="0"
+            (keyup)="onQuantityKey(q.value)" (change)="QuantityChange(q.value)" [(ngModel)]='quantity' #q placeholder=" " required
+            #quantityControl="ngModel" [ngClass]="{'disabledClass':quantityControl.errors?.required}" />
+          <span id="quantity_id">Quantity</span>
+        </div>
+
+        <div id="price_field" style="float:left;margin-left:75px; ">
+          <input type="number" min="0" id="form_amount" name="amount" [(ngModel)]="model.amount" value='{{amount}}'
+            readonly placeholder=" " />
+          <span id="amount_id">Amount</span>
+        </div>
+
+        <button class="reset_button" type="reset">CANCEL</button>
+
+        <button class="submit_button" type="submit" [disabled]="testForm.invalid"
+          [class.disabledSubmit]="testForm.invalid">SUBMIT</button>
+
+      </div>
+
+    </form>
+  </div>
+
+
+
+  <div class="footer">
+    <p><i class="fas fa-copyright" aria-hidden="true"></i> Copyright 2019 Sharada Residential School. All Rights
+      Reserved.</p>
+  </div>
+
+
+</div>
+
+
+
+
+
+<!-- <div class="purchase_data">
+  <div id="heading">
+    <h3 style="font-family: Segoe UI;color:white; text-align: center;">Enter your purchase details</h3>
+  </div>
+
+  <form (ngSubmit)="postPurchaseData()" #testForm="ngForm" >
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Date:</font><input type="date" name="date" [(ngModel)]="model.date" style="height:20px;width:258px;margin-left: 68px"><br><br><br>
+
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Bill number:</font> <input type="text" name="billNumber" [(ngModel)]="model.billNumber" style="height:20px;width:261px;margin-left: 11px"><br><br><br>
+
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Vendor Name:</font> <input type="text" name="vendorName" [(ngModel)]="model.vendorName" style="height:20px;width:261px;margin-left: 11px"><br><br><br>
+
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Price:</font> <input type="text"  name="price" [(ngModel)]="model.price" style="height:20px;width:261px;margin-left: 63px"  [(ngModel)]='price' name="price"><br><br><br>
+
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Quantity:</font><input type="number" name="quantity" [(ngModel)]="model.quantity" min="0" style="height:20px;width:262px;margin-left: 37px"  [(ngModel)]='quantity'  (keyup)="onKey(q.value)"  (change)="myMethod(q.value)" #q name="quantity"><br><br><br>
+
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Amount:</font><input type="text" name="amount" [(ngModel)]="model.amount" style="height:20px;width:264px;margin-left: 40px" value='{{amount}}' readonly><br><br><br>
+
+    <p><button type="submit" class="button1" >Submit</button></p>
+
+    <p><button  class="button2" type="reset">Cancel</button></p>
+
+    <br><br><br>
+
+  </form>
+
+</div> -->

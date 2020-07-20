@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~handsontable/dist/handsontable.full.css';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+body{
+    margin: 0 !important;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+
+@font-face {
+    font-family: 'daimler';
+    src: url('./assets/fonts/daimler.ttf') format('truetype'),
+           url('./assets/fonts/daimler.eot') format('eot'),
+         url('./assets/fonts/daimler.woff') format('woff');
+         
+  }

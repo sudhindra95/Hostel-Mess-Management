@@ -1,0 +1,111 @@
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div class="header">
+    <div id="srs_logo">
+        <img src="assets/images/srs.jpg" height="90">
+    </div>
+
+    <div id="srs_name">
+        Sharada Residential School
+    </div>
+
+    <div id="hostel_name">
+        (Madhava Nilaya Campus)
+    </div>
+
+    <div id="horizontal_nav">
+
+        <a [routerLink]="['/dashboard']">
+            <div id="srs_text">
+                <p id="horizontal_options">STOCK</p>
+            </div>
+        </a>
+
+
+        <a [routerLink]="['/add-purchase']">
+            <div id="srs_text">
+                <p id="horizontal_options">PURCHASE</p>
+            </div>
+        </a>
+
+        <a [routerLink]="['/add-consumption']">
+            <div id="srs_text">
+                <p id="horizontal_options">CONSUMPTION</p>
+            </div>
+        </a>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+<div class="body_content">
+
+    <a style="text-decoration: none" [routerLink]="['/add-consumption']">
+        <div id="add_consumption">
+            <p>ADD CONSUMPTION</p>
+        </div>
+    </a>
+
+    <a style="text-decoration: none" [routerLink]="['/view_consumption']">
+        <div id="view_consumption">
+            <p>VIEW CONSUMPTION</p>
+        </div>
+    </a>
+
+    <a style="text-decoration: none" [routerLink]="['/modify_consumption']">
+        <div id="modify_consumption">
+            <p>MODIFY CONSUMPTION</p>
+        </div>
+    </a>
+
+    <hr id="line" />
+
+    <br><br><br><br><br><br><br>
+    <button class="save_button" (click)="saveData()" style="float:right;margin-right: 130px;margin-top:180px">Save
+    </button>
+
+    <div *ngIf="show" class="loader"></div>
+
+    <div *ngIf="isErrorMessage" [ngStyle]="{'display':isErrorMessage ? 'block': 'none'}"
+    style="margin-left: 585px;margin-top:100px;color:red;font-size:26px;position:absolute;font-family: daimler!important">
+    {{errorMessage}}
+    </div>  
+
+    <div [ngStyle]="{'display':display_sheet}">
+
+        <div
+            style="height:420px;width:950px;overflow: scroll;overflow-x: hidden;overflow-y: hidden;;margin-left:240px;">
+
+            <hot-table #hot [hotId]="instance" [columns]="columns" [colHeaders]="colHeaders" [data]="dataBank"
+                [settings]="settings" id="example1">
+            </hot-table>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="footer">
+        <p><i class="fas fa-copyright" aria-hidden="true"></i> Copyright 2019 Sharada Residential School. All Rights
+            Reserved.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+</div>

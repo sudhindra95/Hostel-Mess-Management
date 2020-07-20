@@ -1,0 +1,183 @@
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div class="header">
+  <div id="srs_logo">
+    <img src="assets/images/srs.jpg" height="90">
+  </div>
+
+  <div id="srs_name">
+      Sharada Residential School
+  </div>
+
+  <div id="hostel_name">
+    (Madhava Nilaya Campus)
+  </div>
+
+  <div id="horizontal_nav">
+
+    <a [routerLink]="['/dashboard']">
+      <div id="srs_text">
+        <p id="horizontal_options">STOCK</p>
+      </div>
+    </a>
+
+  
+
+    <a [routerLink]="['/add-purchase']">
+      <div id="srs_text">
+        <p id="horizontal_options">PURCHASE</p>
+      </div>
+    </a>
+
+    <a [routerLink]="['/add-consumption']">
+      <div id="srs_text">
+        <p id="horizontal_options">CONSUMPTION</p>
+      </div>
+    </a>
+
+
+  </div>
+
+
+
+
+</div>
+
+
+<div class="body_content">
+
+  <a style="text-decoration: none" [routerLink]="['/add-consumption']" [ngStyle]="{'background-color':bgcolor}">
+    <div id="add_consumption">
+      <p>ADD CONSUMPTION</p>
+    </div>
+  </a>
+
+  <a style="text-decoration: none" [routerLink]="['/view_consumption']" [ngStyle]="{'background-color':backcolor}"
+    (click)="changeBgColorAddPurchase()">
+    <div id="view_consumption">
+      <p>VIEW CONSUMPTION</p>
+    </div>
+  </a>
+
+  <a style="text-decoration: none" [routerLink]="['/modify_consumption']">
+    <div id="modify_consumption">
+      <p>MODIFY CONSUMPTION</p>
+    </div>
+  </a>
+
+  <hr id="line" />
+
+  <div class="form-container">
+    <form (ngSubmit)="postAddConsumptionData(testForm)" #testForm="ngForm" autocomplete="off" ngNativeValidate>
+      <div id="form-heading">
+        <p id="para-heading">Enter your purchase details</p>
+      </div>
+
+      <div id="form_fields">
+        <div id="date_field" style="float:left">
+          <label style="font-size: 12px;font-family: daimler !important;">Date</label><br>
+          <input type="date" id="form_data" name="dateofconsumption" [(ngModel)]="model.dateofconsumption" max="{{mydate}}" required/>
+        </div>
+
+        <div id="billno_field" style="float:left; margin-left:75px;margin-top:19px;">
+          <input type="text" id="form_bnum" placeholder=" " name="productname" [(ngModel)]="model.productname"
+          (keyup)="onKey($event)" required #searchControl="ngModel" #prodName/>
+          <span id="bnum_id">Product Name</span>
+        </div>
+        <div class="dropdown-content" [ngStyle]="{'display':display_dropdown}"
+          [ngClass]="{'disabledClass':searchControl.errors?.required}">
+          <div *ngFor='let product of productList;' [ngClass]="{'disabledClass':searchControl.errors?.required}">
+            <a (click)="getUrlText(textValue.text)" #textValue>{{product}}</a>
+          </div>
+
+        </div>
+
+        <div id="vendorname_field" style="float:left; margin-left:75px;margin-top:19px;">
+          <input type="number" step=0.001 id="form_vname" name="consumedquantity" [(ngModel)]="model.consumedquantity" placeholder=" " required />
+          <span id="vname_id">Consumed Quantity</span>
+        </div>
+
+
+        <button class="reset_button" type="reset">CANCEL</button>
+
+        <button class="submit_button" type="submit" [disabled]="testForm.invalid" [class.disabledSubmit]="testForm.invalid">SUBMIT</button>
+
+      </div>
+
+    </form>
+  </div>
+
+
+
+  <div class="footer">
+    <p><i class="fas fa-copyright" aria-hidden="true"></i> Copyright 2019 Sharada Residential School. All Rights
+      Reserved.</p>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="header">
+  <div id="srs_logo">
+   <img src="assets/images/srs.jpg" >
+ </div> 
+
+ <div id="srs_text">
+   <p style="margin-left: 20px">Sharada Residential School</p>
+ </div>
+ 
+</div>
+
+<div class="product_data">
+<div id="heading">
+  <h3 style="font-family: Segoe UI;color:white; text-align: center;">Enter your product details</h3>
+</div>
+
+</div>
+
+
+<div class="consumption_data">
+  <div id="heading">
+    <h3 style="font-family: Segoe UI;color:white; text-align: center;">Enter your consumption details</h3>
+  </div>
+
+  <form (ngSubmit)="postAddConsumptionData()" #testForm="ngForm" >
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Product Name:</font> <input type="text" name="productName" [(ngModel)]="model.productName" style="height:20px;width:261px;margin-left: 11px"><br><br><br>
+    
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Consumed Quantity:</font><input type="number" name="consumedQuantity" [(ngModel)]="model.consumedQuantity" min="0" style="height:20px;width:262px;margin-left: 37px"  [(ngModel)]='quantity'  (keyup)="onKey(q.value)"  (change)="myMethod(q.value)" #q name="quantity"><br><br><br>
+
+    <font style="font-family: 'Segoe UI';font-size:18px;margin-left:57px;">Date:</font><input type="date" name="dateOfConsumption" [(ngModel)]="model.dateOfConsumption" style="height:20px;width:258px;margin-left: 68px"><br><br><br>
+
+
+    <p><button type="submit" class="button1" >Submit</button></p>
+
+    <p><button  class="button2" type="reset">Cancel</button></p>
+
+    <br><br><br>
+
+  </form>
+
+</div> -->

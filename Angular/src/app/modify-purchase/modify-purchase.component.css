@@ -1,0 +1,194 @@
+@import '~handsontable/dist/handsontable.full.css';
+
+.header{
+   
+    background-color: #002a65;
+    height: 90px;
+    width:100%;
+  
+    
+  }
+  
+  #srs_logo{
+    width:130px;
+    margin-left:40px;
+    /* height:60px; */
+    float:left;
+  }
+
+  #srs_name{
+    width:500px;
+    margin-left:70px;
+    margin-top:20px;
+    color:white;
+    font-weight:bold;
+    font-size: 32pt;
+    font-family: daimler !important;
+    /* height:60px; */
+    float:left;
+  }
+  
+  #hostel_name{
+    margin-top:35px;
+    color:#5df7d1;
+    float:left;
+    font-size: 14pt;
+    width:290px;
+    font-family: daimler !important;
+  }
+  
+  #horizontal_nav{
+    margin-left:770px;
+  }
+  
+  #srs_text{
+    float:left;
+    font-family: daimler !important;
+    font-size: 18px;
+    color:#a1c0e7;
+    display: block;
+    text-align: center;
+    margin-top: 17px;
+  }
+  
+  #srs_text:hover{
+    background-color: rgb(187, 130, 25);
+  }
+  
+  #horizontal_options{
+    margin-left:20px;
+    margin-right: 20px;
+  }
+  
+  
+  
+  .body_content{
+    background-color: white;
+  }
+  
+  
+  #add_purchase{
+    height:50px;
+    width:150px;
+    background-color: #f7f7f7;
+    margin-top:53px;
+    position: absolute;
+    margin-left: 240px;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    float:left;
+    font-weight: bold;
+    font-family: daimler !important;
+  }
+  
+  #view_purchase{
+    height:50px;
+    width:150px;
+    background-color: #f7f7f7;
+    position:absolute;
+    margin-left:390px;
+    margin-top:53px;
+    text-decoration: none;
+    color: black;
+    float:left;
+    text-align: center;
+    font-weight: bold;
+    font-family: daimler !important;
+  }
+  
+  
+  #modify_purchase{
+    height:50px;
+    width:150px;
+    background-color: #005cab;
+    position:absolute;
+    margin-left:541px;
+    margin-top:53px;
+    text-decoration: none;
+    color: white;
+    float:left;
+    text-align: center;
+    font-weight: bold;
+    font-family: daimler !important;
+  }
+  
+  
+  #line{
+    color: black;
+    width: 30px;
+    position: absolute;
+    width:625px;
+    height: 3px;
+    border: none;
+    background-color: rgb(223, 213, 213);
+    margin-top: 100px;
+    /* position: absolute;*/ 
+    margin-left: 691px;
+  }
+
+
+  .spreadsheet{
+    height:500px;
+    max-width:750px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    margin-left:240px;
+    margin-top: 145px;
+  }
+  
+
+  .save_button{
+    cursor: pointer;
+    background-color: #005cab;
+    height: 40px;
+    width: 120px;
+    border-radius: 30px;
+    border: none;
+    color:white;
+    outline:none;
+    font-weight: bold;
+    font-family: daimler !important;
+  }
+
+
+
+  .footer{
+    font-family: daimler !important;
+    background-color: #e0e0d1;
+    text-align:center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: grey;
+    text-align: center;
+    font-size: 12px;
+  }
+
+
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 60%;
+    border-top: 5px solid #33331a;
+    width: 30px;
+    height: 30px;
+    margin-top: 80px;
+    margin-left:650px;
+    -webkit-animation: spin 1.5s linear infinite; /* Safari */
+    animation: spin 1.5s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
